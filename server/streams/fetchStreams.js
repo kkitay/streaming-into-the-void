@@ -59,6 +59,9 @@ const addVoid = async (client, stream) => {
 // returns json.pagination (new cursor)
 const fetchStreams = async (cursor, token) => {
   // set up call
+  if (!token) {
+      token = await refreshAccessToken();
+  }
   let options = {
     uri:
       'https://api.twitch.tv/helix/streams?first=100&language=en&after=' +
